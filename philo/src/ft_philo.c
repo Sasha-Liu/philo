@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:32:02 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/20 16:58:52 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 17:22:25 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 void	*ft_philo(void *arg)
 {
-	t_philo	*philo;
+	t_philo			*philo;
+	int				num;
+	unsigned int	philo_num;
+	pthread_mutex_t *fork;
+	pthread_mutex_t *print;
 
 	philo = (t_philo *)arg;
+	num = philo->num;
+	philo_num = philo->table->philo_num;
+	fork = philo->table->fork;
+	print = &(philo->table->print);
 	while (philo->table->stop)
 		;
 	if (philo->num % 2)
 		ft_usleep((philo->table->time_to_eat) / 10);
 	while (1)
 	{
-		ft_eat(philo);
+		ft_eat(fork, num, philo_num);
 		ft_sleep(philo);
 		ft_think(philo);
 	}
@@ -45,7 +53,7 @@ void	ft_think(t_philo *philo)
 	pthread_mutex_unlock(&(table->print));
 }
 
-void	ft_eat(t_philo *philo)
+void	ft_eat(pthread_mutex_t *fork, int num, unsigned int philo_num)
 {
 	t_table	*table;
 	int		num;
