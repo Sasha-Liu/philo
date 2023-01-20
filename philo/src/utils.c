@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:46:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 15:58:27 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 16:43:25 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_usleep(unsigned int sec)
 {
 	unsigned int	usec;
 
-	usec = sec * 1000;
+	usec = sec * 1000000;
 	while (usec > 0)
 	{
 		if (usleep(1000))
