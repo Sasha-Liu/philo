@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/19 21:02:50 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/20 11:15:31 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,18 @@ typedef struct s_philo{
 int 			ft_check_input(int argc, char **argv);
 int 			ft_is_num(char *num);
 
-/**********  ft_init.c  **********/
-t_table			*ft_init(int argc, char **argv);
-t_table 		*ft_init_table(int argc, char **argv);
-t_philo			*ft_init_philo(t_table *table);
+/**********  ft_malloc.c  **********/
+t_table			*ft_malloc(unsigned int philo_num);
 void			ft_free(t_table **table);
-unsigned int	ft_atoi(char *num);
+
+/**********  ft_init.c  **********/
+int				ft_init(t_table *table, int argc, char **argv);
+void			ft_init_table(t_table *table, int argc, char **argv);
+void			ft_init_philo(t_table *table);
+
+/**********  ft_init_mutex.c  **********/
+int				ft_init_mutex(t_table *table);
+int 			ft_destroy_mutex(t_table *table);
 
 /**********  utils.c  **********/
 unsigned int	ft_atoi(char *num);
