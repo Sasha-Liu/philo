@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:46:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/19 20:56:26 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:58:27 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,21 @@ unsigned int	ft_atoi(char *num)
 		num++;
 	}
 	return (sum);
+}
+
+int	ft_usleep(unsigned int sec)
+{
+	unsigned int	usec;
+
+	usec = sec * 1000;
+	while (usec > 0)
+	{
+		if (usleep(1000))
+		{
+			write(2, "usleep fails\n", 13);
+			return (1);
+		}
+		usec -= 1000;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:50:37 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 12:50:56 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 14:33:55 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_init_table(t_table *table, int argc, char **argv)
 	table->meal_num = -1;
 	if (argc == 6)
 		table->meal_num = ft_atoi(argv[5]);
-	table->stop = 0;
+	table->stop = 1;
 }
 
 void	ft_init_philo(t_table *table)

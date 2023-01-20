@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 12:25:37 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:59:39 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,20 @@ void			ft_init_philo(t_table *table);
 int				ft_init_mutex(t_table *table);
 int 			ft_destroy_mutex(t_table *table);
 
+/**********  ft_create_thread.c  **********/
+int				ft_create_thread(t_table *table, t_philo *philo);
+
+/**********  ft_philo.c  **********/
+void			*ft_philo(void *arg);
+void			ft_think(t_philo *philo);
+void			ft_eat(t_philo *philo);
+void			ft_sleep(t_philo *philo);
+void			ft_get_fork(t_philo *philo);
+
 /**********  utils.c  **********/
 unsigned int	ft_atoi(char *num);
 long			ft_set_time(void);
 long			ft_get_time(t_table *table);
+int				ft_usleep(unsigned int sec);
 
 #endif
