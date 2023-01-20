@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:50:37 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 11:14:48 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 12:50:56 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	ft_init(t_table *table, int argc, char **argv)
 {
-	t_table	*table;
-	t_philo	*philo;
-
 	ft_init_table(table, argc, argv);
 	ft_init_philo(table);
 	if (ft_init_mutex(table))

@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:26 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 11:20:58 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 12:50:29 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int main(int argc, char **argv)
     
     //create thread
     //supervise
-    ft_destroy_mutex(table);
+	ft_destroy_mutex(table);
 	ft_free(&table);
 }

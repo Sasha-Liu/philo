@@ -6,7 +6,8 @@ OBJ_DIR	=	./.obj/
 
 INC_DIR	=	./include/
 
-LIST_SRC	=	
+LIST_SRC	=	philo.c ft_check_input.c ft_malloc.c ft_init.c \
+				ft_init_mutex.c utils.c
 
 LIST_OBJ	=	$(LIST_SRC:.c=.o)
 
@@ -22,12 +23,12 @@ MAKEFILE	=	Makefile
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror 
 
 all: $(NAME)
 
 $(NAME)	:	$(OBJ_DIR) $(OBJ) $(INC) $(MAKEFILE)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -pthread
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(INC) 
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)

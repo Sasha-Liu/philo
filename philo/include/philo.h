@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 11:15:31 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 12:25:37 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <string.h>
 # include <stdio.h> 
 # include <unistd.h>
+# include <stdlib.h> 
 # include <sys/time.h>
 # include <pthread.h>
 

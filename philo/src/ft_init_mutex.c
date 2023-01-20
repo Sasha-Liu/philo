@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:06:29 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/20 11:10:41 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 12:50:46 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	ft_init_mutex(t_table *table)
 	}
 	while (i < n)
 	{
-		if (pthread_mutex_init(table->fork + i, NULL))
+		if (pthread_mutex_init((table->fork) + i, NULL))
 		{
 			while (i != 0)
 			{
-				pthread_mutex_destroy(table->fork + i);
+				pthread_mutex_destroy((table->fork) + i);
 				i--;
 			}
 			pthread_mutex_destroy(&(table->print));
@@ -55,7 +55,7 @@ int ft_destroy_mutex(t_table *table)
     }
     while (i < n)
     {
-        if (pthread_mutex_destroy(table->fork + i))
+        if (pthread_mutex_destroy((table->fork) + i))
             err = 1;
         i++;
     }

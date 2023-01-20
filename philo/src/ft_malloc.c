@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:23:08 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/20 11:20:25 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/20 12:49:57 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_table	*ft_malloc(unsigned int philo_num)
 	t_table			*table;
 	t_philo			*philo;
 	pthread_mutex_t	*fork;
-	unsigned int	i;
 
 	table = malloc(sizeof(t_table));
 	philo = malloc(sizeof(t_philo) * philo_num);
@@ -30,6 +29,7 @@ t_table	*ft_malloc(unsigned int philo_num)
 		write(2, "malloc fails\n", 13);
 		return (NULL);
 	}
+	table->fork = fork;
 	table->philo = philo;
 	return (table);
 }
