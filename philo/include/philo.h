@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 13:50:03 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/21 21:35:53 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef pthread_mutex_t p_mutex;
 # define TIME_TO_SLEEP 3
 # define MEAL_NUM 4
 # define STOP 5
+# define PRINT 0
+# define FORK_L 1
+# define FORK_R 2
 
 typedef struct s_table{
 	int				data[6];
@@ -68,6 +71,7 @@ int				ft_create_thread(t_table *table, t_philo *philo);
 
 /**********  ft_life.c  **********/
 void			*ft_life(void *arg);
+int	ft_init_life(t_philo *philo, int **data, long **start, p_mutex *lock[]);
 
 /**********  ft_life_2.c  **********/
 void	ft_think(int num, long start_time, p_mutex *print);
