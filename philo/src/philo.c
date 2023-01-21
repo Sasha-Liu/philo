@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:26 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 16:44:19 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/21 13:49:52 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	}
 	//supervise
 	table->start_time = ft_set_time();
-	table->stop = 0;
+	table->data[STOP] = 0;
 	while(1);
 	//supervise
 	ft_destroy_mutex(table);

@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philo.c                                         :+:      :+:    :+:   */
+/*   ft_life.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:03:11 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 12:40:05 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/21 14:12:31 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-//locks[0 - 2] = print , fork1, fork2
-//data[] = num, philo_num, 
+ 
  void	*ft_life(void *arg)
 {
-	t_philo			*philo;
-	int				num;
-	unsigned int	philo_num;
-	pthread_mutex_t *fork;
-	pthread_mutex_t *print;
-
+	t_philo	*philo;
+	int		num;
+	int		*data;
+	long	*start_time;
+	p_mutex	*lock;
+	
 	philo = (t_philo *)arg;
 	num = philo->num;
-	philo_num = philo->table->philo_num;
-	fork = philo->table->fork;
-	print = &(philo->table->print);
-	while (philo->table->stop)
+	data = philo->table->data;
+	start_time = &(philo->table->start_time);
+	lock = philo->table->lock;
+	while (philo->table->data[STOP])
 		;
 	if (philo->num % 2)
-		ft_usleep((philo->table->time_to_eat) / 10);
+		ft_usleep((philo->table->data[TIME_TO_EAT]));
 	while (1)
 	{
-		ft_get_fork();
-		ft_eat(fork, num, philo_num);
-		ft_usleep();
-		ft_sleep(philo);
-		ft_usleep();
-		ft_think(philo);
+		ft_get_fork(num, *start_time, &(lock[data[PHILO_NUM]]), &(lock[num]));
+		ft_get_fork(num, *start_time, &(lock[data[PHILO_NUM]]), &(lock[(num + 1) % data[PHILO_NUM]]));
+		ft_eat(philo, *start_time, &(lock[data[PHILO_NUM]]), data[TIME_TO_EAT]);
+		ft_release_fork(&(lock[num]), &(lock[(num + 1) % data[PHILO_NUM]]));
+		ft_sleep(num, *start_time, &(lock[data[PHILO_NUM]]), data[TIME_TO_SLEEP]);
+		ft_think(num, *start_time, &(lock[data[PHILO_NUM]]));
 	}
 	return (0);
 }

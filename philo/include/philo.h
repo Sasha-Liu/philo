@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 12:39:47 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/21 13:50:03 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef pthread_mutex_t p_mutex;
 # define STOP 5
 
 typedef struct s_table{
-	int				data[6]
+	int				data[6];
 	long			start_time;
 	pthread_mutex_t	*lock;
 	t_philo			*philo;
@@ -66,12 +66,15 @@ int 			ft_destroy_mutex(t_table *table);
 /**********  ft_create_thread.c  **********/
 int				ft_create_thread(t_table *table, t_philo *philo);
 
-/**********  ft_philo.c  **********/
+/**********  ft_life.c  **********/
 void			*ft_life(void *arg);
-void			ft_think(t_philo *philo);
-void			ft_eat(t_philo *philo);
-void			ft_sleep(t_philo *philo);
-void			ft_get_fork(t_philo *philo);
+
+/**********  ft_life_2.c  **********/
+void	ft_think(int num, long start_time, p_mutex *print);
+void	ft_eat(t_philo *philo, long start_time, p_mutex *print, int time_to_eat);
+void	ft_get_fork(int num, long start_time, p_mutex *print, p_mutex *fork);
+void	ft_release_fork(p_mutex *fork1, p_mutex *fork2);
+void	ft_sleep(int num, long start_time, p_mutex *print, int time_to_sleep);
 
 /**********  utils.c  **********/
 int				ft_atoi(char *num);

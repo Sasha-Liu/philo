@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:46:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 10:43:40 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/21 13:59:39 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ long	ft_set_time(void)
     long	cur_time;
 
 	gettimeofday(&tv, NULL);
-    cur_time = tv.tv_sec * 1000000 + tv.tv_usec;
-	return (cur_time / 1000);
+    cur_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (cur_time);
 }
 
 long	ft_get_time(long start_time)
