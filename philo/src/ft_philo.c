@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 11:32:02 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/20 17:22:25 by hsliu            ###   ########.fr       */
+/*   Created: 2023/01/21 11:03:11 by sasha             #+#    #+#             */
+/*   Updated: 2023/01/21 12:40:05 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*ft_philo(void *arg)
+//locks[0 - 2] = print , fork1, fork2
+//data[] = num, philo_num, 
+ void	*ft_life(void *arg)
 {
 	t_philo			*philo;
 	int				num;
@@ -31,81 +33,12 @@ void	*ft_philo(void *arg)
 		ft_usleep((philo->table->time_to_eat) / 10);
 	while (1)
 	{
+		ft_get_fork();
 		ft_eat(fork, num, philo_num);
+		ft_usleep();
 		ft_sleep(philo);
+		ft_usleep();
 		ft_think(philo);
 	}
 	return (0);
-}
-
-void	ft_think(t_philo *philo)
-{
-	t_table	*table;
-	long	time;
-	int		num;
-
-	table = philo->table;
-	time = ft_get_time(table);
-	num = philo->num;
-	pthread_mutex_lock(&(table->print));
-	printf("%lu %u ", time, num);
-	printf("is thinking\n");
-	pthread_mutex_unlock(&(table->print));
-}
-
-void	ft_eat(pthread_mutex_t *fork, int num, unsigned int philo_num)
-{
-	t_table	*table;
-	int		num;
-	long	time;
-
-	table = philo->table;
-	num = philo->num;
-	ft_get_fork(philo);
-	time = ft_get_time(table);
-	pthread_mutex_lock(&(table->print));
-	printf("%lu %u ", time, num);
-	printf("is eating\n");
-	pthread_mutex_unlock(&(table->print));
-	philo->meal_eaten++;
-	philo->last_meal_time = time;
-	ft_usleep(table->time_to_eat);
-	pthread_mutex_unlock(table->fork + num);
-	pthread_mutex_unlock(table->fork + (num + 1) % table->philo_num);
-}
-
-void	ft_get_fork(t_philo *philo)
-{
-	t_table	*table;
-	int		num;
-	long	time;
-
-	table = philo->table;
-	num = philo->num;
-	pthread_mutex_lock(table->fork + num);
-	time = ft_get_time(table);
-	pthread_mutex_lock(&(table->print));
-	printf("%lu %u ", time, num);
-	printf("has gotten a fork\n");
-	pthread_mutex_unlock(&(table->print));
-	pthread_mutex_lock(table->fork + (num + 1) % table->philo_num);
-	time = ft_get_time(table);
-	pthread_mutex_lock(&(table->print));
-	printf("%lu %u ", time, num);
-	printf("has gotten a fork\n");
-	pthread_mutex_unlock(&(table->print));
-}
-
-void	ft_sleep(t_philo *philo)
-{
-	t_table	*table;
-	long	time;
-
-	table = philo->table;
-	time = ft_get_time(table);
-	pthread_mutex_lock(&(table->print));
-	printf("%lu %u ", time, philo->num);
-	printf("is sleeping\n");
-	pthread_mutex_unlock(&(table->print));
-	ft_usleep(table->time_to_sleep);
 }

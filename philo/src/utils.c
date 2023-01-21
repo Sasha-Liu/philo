@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:46:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 16:43:25 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/21 10:43:40 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ long	ft_set_time(void)
 	return (cur_time / 1000);
 }
 
-long	ft_get_time(t_table *table)
+long	ft_get_time(long start_time)
 {
-	long	start_time;
 	long	curr_time;
 
-	start_time = table->start_time;
 	curr_time = ft_set_time();
 	return (curr_time - start_time);
 }
 
-unsigned int	ft_atoi(char *num)
+int	ft_atoi(char *num)
 {
-	unsigned int	sum;
+	int	sum;
 
 	sum = 0;
 	while (*num == ' ' || *num == '+')

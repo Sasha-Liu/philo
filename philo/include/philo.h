@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 15:59:39 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/21 12:39:47 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,19 @@
 
 typedef struct s_philo t_philo;
 typedef struct s_table t_table;
+typedef pthread_mutex_t p_mutex;
+
+# define PHILO_NUM 0
+# define TIME_TO_DIE 1
+# define TIME_TO_EAT 2
+# define TIME_TO_SLEEP 3
+# define MEAL_NUM 4
+# define STOP 5
 
 typedef struct s_table{
-	unsigned int	philo_num;
-	unsigned int	time_to_die;
-	unsigned int	time_to_eat;
-	unsigned int	time_to_sleep;
-	int				meal_num;
+	int				data[6]
 	long			start_time;
-	int				stop;
-	pthread_mutex_t print;
-	pthread_mutex_t *fork;
+	pthread_mutex_t	*lock;
 	t_philo			*philo;
 } t_table;
 
@@ -65,16 +67,16 @@ int 			ft_destroy_mutex(t_table *table);
 int				ft_create_thread(t_table *table, t_philo *philo);
 
 /**********  ft_philo.c  **********/
-void			*ft_philo(void *arg);
+void			*ft_life(void *arg);
 void			ft_think(t_philo *philo);
 void			ft_eat(t_philo *philo);
 void			ft_sleep(t_philo *philo);
 void			ft_get_fork(t_philo *philo);
 
 /**********  utils.c  **********/
-unsigned int	ft_atoi(char *num);
+int				ft_atoi(char *num);
 long			ft_set_time(void);
-long			ft_get_time(t_table *table);
+long			ft_get_time(long start_time);
 int				ft_usleep(unsigned int sec);
 
 #endif

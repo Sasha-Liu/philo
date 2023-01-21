@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_thread.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:38:43 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/20 16:39:55 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/21 12:39:26 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 //(since all resoucre return to systen after main exit) 
 int	ft_create_thread(t_table *table, t_philo *philo)
 {
-	unsigned int	i;
-	unsigned int	n;
+	int	i;
+	int	n;
 
 	i = 0;
-	n = table->philo_num;
+	n = table->data[PHILO_NUM];
 	while (i < n)
 	{
-		if (pthread_create(&(philo[i].tid), NULL, ft_philo, &(philo[i])))
+		if (pthread_create(&(philo[i].tid), NULL, ft_life, &(philo[i])))
 		{
 			write(2, "pthread_create fails\n", 21);
 			return (1);

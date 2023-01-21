@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:23:08 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/20 12:49:57 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/21 12:21:33 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ t_table	*ft_malloc(unsigned int philo_num)
 {
 	t_table			*table;
 	t_philo			*philo;
-	pthread_mutex_t	*fork;
+	pthread_mutex_t	*lock;
 
 	table = malloc(sizeof(t_table));
 	philo = malloc(sizeof(t_philo) * philo_num);
-	fork = malloc(sizeof(pthread_mutex_t) * philo_num);
-	if (table == NULL || philo == NULL || fork == NULL)
+	lock = malloc(sizeof(pthread_mutex_t) * (philo_num + 1));
+	if (table == NULL || philo == NULL || lock == NULL)
 	{
 		free(table);
 		free(philo);
-		free(fork);
+		free(lock);
 		write(2, "malloc fails\n", 13);
 		return (NULL);
 	}
-	table->fork = fork;
+	table->lock = lock;
 	table->philo = philo;
 	return (table);
 }
@@ -38,9 +38,9 @@ t_table	*ft_malloc(unsigned int philo_num)
 void	ft_free(t_table **table)
 {
 	free((*table)->philo);
-	free((*table)->fork);
+	free((*table)->lock);
 	(*table)->philo = NULL;
-	(*table)->fork = NULL;
+	(*table)->lock = NULL;
 	free(*table);
 	*table = NULL;
 }

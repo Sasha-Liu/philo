@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:03:28 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/19 18:27:45 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/21 12:17:58 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_check_input(int argc, char **argv)
 	return (0);
 }
 
-//if valide return 1
+//if it's a non negative number, return 1
 //else return 0
 //doesn't check overflow / underflow
 int	ft_is_num(char *num)

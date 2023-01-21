@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_mutex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:06:29 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/20 14:22:34 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/21 12:35:00 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,20 @@
 
 int	ft_init_mutex(t_table *table)
 {
-	unsigned int	i;
-	unsigned int	n;
+	int	i;
+	int	n;
 	
 	i = 0;
-	n = table->philo_num;
-	if (pthread_mutex_init(&(table->print), NULL))
+	n = table->data[PHILO_NUM];
+	while (i <= n)
 	{
-		return (1);
-	}
-	while (i < n)
-	{
-		if (pthread_mutex_init((table->fork) + i, NULL))
+		if (pthread_mutex_init(&(table->lock[i]), NULL))
 		{
 			while (i != 0)
 			{
-				pthread_mutex_destroy((table->fork) + i);
+				pthread_mutex_destroy(&(table->lock[i]));
 				i--;
 			}
-			pthread_mutex_destroy(&(table->print));
 			return (1);
 		}
 		i++;
@@ -42,20 +37,16 @@ int	ft_init_mutex(t_table *table)
 
 int ft_destroy_mutex(t_table *table)
 {
-    unsigned int	i;
-	unsigned int	n;
-    int             err;
+    int	i;
+	int	n;
+    int	err;
 	
 	i = 0;
-	n = table->philo_num;
+	n = table->data[PHILO_NUM];
     err = 0;
-    if (pthread_mutex_destroy(&(table->print)))
+    while (i <= n)
     {
-        err = 1;
-    }
-    while (i < n)
-    {
-        if (pthread_mutex_destroy((table->fork) + i))
+        if (pthread_mutex_destroy(&(table->lock[i])))
             err = 1;
         i++;
     }
