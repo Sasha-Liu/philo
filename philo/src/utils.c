@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:46:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 13:59:39 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/23 17:44:24 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_atoi(char *num)
 		num++;
 	while (*num >= '0' && *num <= '9')
 	{
-		sum += *num - '0';
+		sum = sum * 10 + (*num) - '0';
 		num++;
 	}
 	return (sum);
@@ -52,7 +52,7 @@ int	ft_usleep(unsigned int sec)
 	unsigned int	usec;
 
 	usec = sec * 1000000;
-	while (usec > 0)
+	while (usec > 1000)
 	{
 		if (usleep(1000))
 		{
@@ -61,5 +61,6 @@ int	ft_usleep(unsigned int sec)
 		}
 		usec -= 1000;
 	}
+	usleep(usec);
 	return (0);
 }

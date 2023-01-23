@@ -8,7 +8,7 @@ INC_DIR	=	./include/
 
 LIST_SRC	=	philo.c ft_check_input.c ft_malloc.c ft_init.c \
 				ft_init_mutex.c utils.c ft_create_thread.c \
-				ft_life.c ft_life_2.c
+				ft_life.c ft_life_2.c ft_loop.c
 
 LIST_OBJ	=	$(LIST_SRC:.c=.o)
 

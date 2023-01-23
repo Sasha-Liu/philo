@@ -6,13 +6,13 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:03:11 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 21:41:05 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/23 17:27:12 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
  
- void	*ft_life(void *arg)
+void	*ft_life(void *arg)
 {
 	t_philo	*philo;
 	int		num;

@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/23 16:12:46 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/23 17:06:32 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,28 @@ typedef struct s_philo{
 } t_philo;
 
 /**********  ft_check_input.c  **********/
-int 			ft_check_input(int argc, char **argv);
-int 			ft_is_num(char *num);
+int 	ft_check_input(int argc, char **argv);
+int 	ft_is_num(char *num);
 
 /**********  ft_malloc.c  **********/
-t_table			*ft_malloc(unsigned int philo_num);
-void			ft_free(t_table **table);
+t_table	*ft_malloc(unsigned int philo_num);
+void	ft_free(t_table **table);
 
 /**********  ft_init.c  **********/
-int				ft_init(t_table *table, int argc, char **argv);
-void			ft_init_table(t_table *table, int argc, char **argv);
-void			ft_init_philo(t_table *table);
+int		ft_init(t_table *table, int argc, char **argv);
+void	ft_init_table(t_table *table, int argc, char **argv);
+void	ft_init_philo(t_table *table);
 
 /**********  ft_init_mutex.c  **********/
-int				ft_init_mutex(t_table *table);
-int 			ft_destroy_mutex(t_table *table);
+int		ft_init_mutex(t_table *table);
+int 	ft_destroy_mutex(t_table *table);
 
 /**********  ft_create_thread.c  **********/
-int				ft_create_thread(t_table *table, t_philo *philo);
+int		ft_create_thread(t_table *table, t_philo *philo);
 
 /**********  ft_life.c  **********/
-void			*ft_life(void *arg);
-int	ft_init_life(t_philo *philo, int **data, long **start, p_mutex *lock[]);
+void	*ft_life(void *arg);
+int		ft_init_life(t_philo *philo, int **data, long **start, p_mutex *lock[]);
 
 /**********  ft_life_2.c  **********/
 void	ft_think(int num, long start_time, p_mutex *print);
@@ -80,10 +80,15 @@ void	ft_get_fork(int num, long start_time, p_mutex *print, p_mutex *fork);
 void	ft_release_fork(p_mutex *fork1, p_mutex *fork2);
 void	ft_sleep(int num, long start_time, p_mutex *print, int time_to_sleep);
 
+/**********  ft_loop.c  **********/
+void	ft_loop(t_table *table, t_philo *philo, int *data);
+int		ft_is_dead(t_philo *philo, long start_time, int *data, p_mutex *print);
+int		ft_all_is_full(t_philo *philo, int *full, int *data, p_mutex *print);
+
 /**********  utils.c  **********/
-int				ft_atoi(char *num);
-long			ft_set_time(void);
-long			ft_get_time(long start_time);
-int				ft_usleep(unsigned int sec);
+int		ft_atoi(char *num);
+long	ft_set_time(void);
+long	ft_get_time(long start_time);
+int		ft_usleep(unsigned int sec);
 
 #endif

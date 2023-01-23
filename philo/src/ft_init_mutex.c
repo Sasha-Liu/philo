@@ -6,11 +6,13 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:06:29 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/21 12:35:00 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/23 17:39:32 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+//#include <errno.h>
 
 int	ft_init_mutex(t_table *table)
 {
@@ -47,12 +49,15 @@ int ft_destroy_mutex(t_table *table)
     while (i <= n)
     {
         if (pthread_mutex_destroy(&(table->lock[i])))
-            err = 1;
+		{
+			err = 1;
+			//perror("pthread_mutex_destroy");	
+		}
         i++;
     }
-    if (err)
-    {
-        write(2, "pthread_mutex_destroy fails\n", 28);
-    }
+	/*if (err)
+	{
+		write(2, "pthread_mutex_destroy fails\n", 28);
+	}*/
     return (err);
 }
