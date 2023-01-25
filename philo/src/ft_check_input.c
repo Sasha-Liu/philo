@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:03:28 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 12:17:58 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:57:18 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //else return 0
 int	ft_check_input(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	if (argc < 5 || argc > 6)
 	{

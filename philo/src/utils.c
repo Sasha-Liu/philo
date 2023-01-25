@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:46:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 12:00:59 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:59:51 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 //use to set the starting time 
 long	ft_set_time(void)
 {
-    struct	timeval	tv;
-    long	cur_time;
+	struct timeval	tv;
+	long			cur_time;
 
 	gettimeofday(&tv, NULL);
-    cur_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	cur_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	return (cur_time);
 }
 
@@ -49,7 +49,7 @@ int	ft_atoi(char *num)
 
 //usleep take microsec as arg (10^-6)
 //start and now is milli sec
-int	ft_usleep(unsigned int sec)
+int	ft_usleep(unsigned int sec, int *data)
 {
 	unsigned int	millisec;
 	long			start;
@@ -60,6 +60,8 @@ int	ft_usleep(unsigned int sec)
 	start = ft_set_time();
 	while (millisec > now + 1000)
 	{
+		if (data[STOP])
+			return (0);
 		if (usleep(1000000))
 		{
 			write(2, "usleep fails\n", 13);
@@ -68,8 +70,6 @@ int	ft_usleep(unsigned int sec)
 		now = ft_get_time(start);
 	}
 	if (millisec > now)
-	{
 		usleep((millisec - (unsigned int)now) * 1000);
-	}
 	return (0);
 }

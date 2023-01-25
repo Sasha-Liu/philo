@@ -3,46 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_life.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:03:11 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/23 17:27:12 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/25 15:05:25 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
- 
+
 void	*ft_life(void *arg)
 {
 	t_philo	*philo;
 	int		num;
 	int		*data;
 	long	*start_time;
-	p_mutex	*lock[3];
-	
+	t_mutex	*lock[3];
+
 	philo = (t_philo *)arg;
 	num = ft_init_life(philo, &data, &start_time, lock);
 	while (data[STOP])
 		;
 	if (num % 2)
-		ft_usleep(data[TIME_TO_EAT]);
-	while (1)
+		ft_usleep(data[TIME_TO_EAT], data);
+	while (!data[STOP])
 	{
-		ft_get_fork(num, *start_time, lock[PRINT], lock[FORK_L]);
-		ft_get_fork(num, *start_time, lock[PRINT], lock[FORK_R]);
-		ft_eat(philo, *start_time, lock[PRINT], data[TIME_TO_EAT]);
-		ft_release_fork(lock[FORK_L], lock[FORK_R]);
-		ft_sleep(num, *start_time, lock[PRINT], data[TIME_TO_SLEEP]);
-		ft_think(num, *start_time, lock[PRINT]);
+		if (ft_get_fork_1(num, *start_time, lock, data))
+			break ;
+		if (ft_get_fork_2(num, *start_time, lock, data))
+			break ;
+		ft_eat(philo, *start_time, lock, data);
+		ft_sleep(num, *start_time, lock, data);
+		ft_think(num, *start_time, lock, data);
 	}
 	return (0);
 }
 
-int	ft_init_life(t_philo *philo, int **data, long **start, p_mutex *lock[])
+int	ft_init_life(t_philo *philo, int **data, long **start, t_mutex *lock[])
 {
 	int	num;
 	int	philo_num;
-	
+
 	*data = philo->table->data;
 	*start = &(philo->table->start_time);
 	num = philo->num;
