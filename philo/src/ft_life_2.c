@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:28:01 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 15:59:13 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/25 16:22:26 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,11 @@ int	ft_get_fork_2(int num, long start_time, t_mutex *lock[], int *data)
 		return (1);
 	}
 	pthread_mutex_lock(lock[FORK_R]);
-	time = ft_get_time(start_time);
 	pthread_mutex_lock(lock[PRINT]);
+	time = ft_get_time(start_time);
 	if (data[STOP])
 	{
+		pthread_mutex_unlock(lock[FORK_L]);
 		pthread_mutex_unlock(lock[FORK_R]);
 		pthread_mutex_unlock(lock[PRINT]);
 		return (1);
