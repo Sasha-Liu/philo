@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:28:01 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 16:22:26 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/25 16:36:52 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_get_fork_1(int num, long start_time, t_mutex *lock[], int *data)
 int	ft_get_fork_2(int num, long start_time, t_mutex *lock[], int *data)
 {
 	long	time;
-	
+
 	if (lock[FORK_L] == lock[FORK_R])
 	{
 		pthread_mutex_unlock(lock[FORK_L]);
