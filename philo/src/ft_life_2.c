@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:28:01 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 15:05:25 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/25 15:59:13 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_get_fork_1(int num, long start_time, t_mutex *lock[], int *data)
 		return (1);
 	}
 	printf("%lu %u ", time, num);
-	printf("has gotten a fork\n");
+	printf("has taken a fork\n");
 	pthread_mutex_unlock(lock[PRINT]);
 	return (0);
 }
@@ -76,7 +76,12 @@ int	ft_get_fork_1(int num, long start_time, t_mutex *lock[], int *data)
 int	ft_get_fork_2(int num, long start_time, t_mutex *lock[], int *data)
 {
 	long	time;
-
+	
+	if (lock[FORK_L] == lock[FORK_R])
+	{
+		pthread_mutex_unlock(lock[FORK_L]);
+		return (1);
+	}
 	pthread_mutex_lock(lock[FORK_R]);
 	time = ft_get_time(start_time);
 	pthread_mutex_lock(lock[PRINT]);
@@ -87,7 +92,7 @@ int	ft_get_fork_2(int num, long start_time, t_mutex *lock[], int *data)
 		return (1);
 	}
 	printf("%lu %u ", time, num);
-	printf("has gotten a fork\n");
+	printf("has taken a fork\n");
 	pthread_mutex_unlock(lock[PRINT]);
 	return (0);
 }
