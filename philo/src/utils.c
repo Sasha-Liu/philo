@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 20:46:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/23 17:44:24 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/25 12:00:59 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,29 @@ int	ft_atoi(char *num)
 	return (sum);
 }
 
+//usleep take microsec as arg (10^-6)
+//start and now is milli sec
 int	ft_usleep(unsigned int sec)
 {
-	unsigned int	usec;
+	unsigned int	millisec;
+	long			start;
+	long			now;
 
-	usec = sec * 1000000;
-	while (usec > 1000)
+	millisec = sec * 1000;
+	now = 0;
+	start = ft_set_time();
+	while (millisec > now + 1000)
 	{
-		if (usleep(1000))
+		if (usleep(1000000))
 		{
 			write(2, "usleep fails\n", 13);
 			return (1);
 		}
-		usec -= 1000;
+		now = ft_get_time(start);
 	}
-	usleep(usec);
+	if (millisec > now)
+	{
+		usleep((millisec - (unsigned int)now) * 1000);
+	}
 	return (0);
 }

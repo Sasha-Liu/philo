@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_mutex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:06:29 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/23 17:39:32 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/25 12:01:25 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int ft_destroy_mutex(t_table *table)
         if (pthread_mutex_destroy(&(table->lock[i])))
 		{
 			err = 1;
-			//perror("pthread_mutex_destroy");	
+			perror("pthread_mutex_destroy");	
 		}
         i++;
     }

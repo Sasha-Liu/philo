@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:26 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/23 17:56:56 by sasha            ###   ########.fr       */
+/*   Updated: 2023/01/25 11:17:21 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	//supervise
-	int *data = table->data;
-	printf("%d %d %d %d %d %d\n", data[0], data[1], data[2], data[3], data[4], data[5]);
+	ft_usleep(5);
 	ft_loop(table, table->philo, table->data);
 	//table->start_time = ft_set_time();
 	//table->data[STOP] = 0;
