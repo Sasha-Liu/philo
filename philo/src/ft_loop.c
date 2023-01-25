@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 21:59:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 15:05:25 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/25 15:09:11 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,4 @@ int	ft_all_is_full(t_philo *philo, int *full, int *data)
 		return (1);
 	}
 	return (0);
-}
-
-void	ft_thread_join(t_table *table, t_philo *philo)
-{
-	int		i;
-	void	*ret;
-
-	i = 0;
-	while (i < table->data[PHILO_NUM])
-	{
-		pthread_join(philo[i].tid, &ret);
-		i++;
-	}
 }
