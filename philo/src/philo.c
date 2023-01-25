@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:26 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 15:02:00 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/25 15:11:06 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int	main(int argc, char **argv)
 	{
 		return (0);
 	}
-	//supervise
 	ft_loop(table, table->philo, table->data);
 	ft_thread_join(table, table->philo);
-	//supervise
 	ft_destroy_mutex(table);
 	ft_free(&table);
 }
