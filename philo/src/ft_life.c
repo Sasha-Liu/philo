@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:03:11 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 15:05:25 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/26 14:02:24 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	*ft_life(void *arg)
 	num = ft_init_life(philo, &data, &start_time, lock);
 	while (data[STOP])
 		;
+	ft_think(num, *start_time, lock, data);
 	if (num % 2)
 		ft_usleep(data[TIME_TO_EAT], data);
 	while (!data[STOP])

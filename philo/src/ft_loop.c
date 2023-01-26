@@ -6,7 +6,7 @@
 /*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 21:59:46 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 15:09:11 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/01/26 13:56:15 by hsliu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_is_dead(t_philo *philo, long start_time, int *data, t_mutex *print)
 	long	time;
 
 	time = ft_get_time(start_time);
-	if (philo->last_meal_time + 1000 * data[TIME_TO_DIE] < time)
+	if (philo->last_meal_time + data[TIME_TO_DIE] < time)
 	{
 		data[STOP] = 1;
 		pthread_mutex_lock(print);
