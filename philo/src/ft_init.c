@@ -12,6 +12,9 @@
 
 #include "philo.h"
 
+/*
+	main thread lock stop
+*/
 int	ft_init(t_table *table, int argc, char **argv)
 {
 	ft_init_table(table, argc, argv);
@@ -21,19 +24,25 @@ int	ft_init(t_table *table, int argc, char **argv)
 		return (1);
 	}
 	ft_init_philo(table);
+	pthread_mutex_lock(table->stop_lock);
 	return (0);
 }
 
 void	ft_init_table(t_table *table, int argc, char **argv)
 {
+	int	n;
+	
 	table->philo_num = ft_atoi(argv[1]);
 	table->time_to_die = ft_atoi(argv[2]);
 	table->time_to_eat = ft_atoi(argv[3]);
 	table->time_to_sleep = ft_atoi(argv[4]);
 	table->meal_num = -1;
-	table->stop = 1;
+	table->stop = 0;
 	if (argc == 6)
-		table->data[MEAL_NUM] = ft_atoi(argv[5]);
+		table->meal_num = ft_atoi(argv[5]);
+	n = table->philo_num;
+	table->print_lock = &(table->lock[n]);
+	table->stop_lock = &(table->lock[n + 1]);
 }
 
 void	ft_init_philo(t_table *table)
@@ -53,8 +62,8 @@ void	ft_init_philo(t_table *table)
 		philo[i].last_meal_time = 0;
 		philo[i].fork1 = &(table->lock[i]); 
 		philo[i].fork2 = &(table->lock[(i + 1) % n]);
-		philo[i].print = &(table->lock[n]);
-		philo[i].stop = &(table->lock[n + 1]);
+		philo[i].print_lock = &(table->lock[n]);
+		philo[i].stop_lock = &(table->lock[n + 1]);
 		philo[i].table = table;
 		i++;
 	}

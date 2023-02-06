@@ -17,60 +17,60 @@
 //count meals eaten
 //check if someone's dead
 //if stop=TRUE, then lock print
-void	ft_loop(t_table *table, t_philo *philo, int *data)
+void	ft_loop(t_table *table, t_philo *philo)
 {
 	int		i;
 	int		full;
-	long	start_time;
-	t_mutex	*print;
 
 	usleep(2000000);
-	print = &(table->lock[data[PHILO_NUM]]);
 	table->start_time = ft_set_time();
-	table->data[STOP] = 0;
-	start_time = table->start_time;
+	pthread_mutex_unlock(table->stop_lock);
 	while (1)
 	{
 		i = 0;
 		full = 0;
-		while (i < data[PHILO_NUM])
+		while (i < table->philo_num)
 		{
-			if (ft_is_dead(philo + i, start_time, data, print))
+			if (ft_is_dead(philo + i, table))
 				return ;
-			if (ft_all_is_full(philo + i, &full, data))
+			if (ft_all_is_full(philo + i, &full, table))
 				return ;
 			i++;
 		}
 	}
 }
 
-int	ft_is_dead(t_philo *philo, long start_time, int *data, t_mutex *print)
+int	ft_is_dead(t_philo *philo, t_table *table)
 {
 	long	time;
 
-	time = ft_get_time(start_time);
-	if (philo->last_meal_time + data[TIME_TO_DIE] < time)
+	time = ft_get_time(table->start_time);
+	if (philo->last_meal_time + table->time_to_die < time)
 	{
-		data[STOP] = 1;
-		pthread_mutex_lock(print);
+		pthread_mutex_lock(table->stop_lock);
+		table->stop = 1;
+		pthread_mutex_unlock(table->stop_lock);
+		pthread_mutex_lock(table->print_lock);
 		printf("%lu %d died\n", time, philo->num);
-		pthread_mutex_unlock(print);
+		pthread_mutex_unlock(table->print_lock);
 		return (1);
 	}
 	return (0);
 }
 
-int	ft_all_is_full(t_philo *philo, int *full, int *data)
+int	ft_all_is_full(t_philo *philo, int *full, t_table *table)
 {
-	if (data[MEAL_NUM] == -1)
+	if (table->meal_num == -1)
 		return (0);
-	if (philo->meal_eaten >= data[MEAL_NUM])
+	if (philo->meal_eaten >= table->meal_num)
 	{
 		(*full)++;
 	}
-	if (*full == data[PHILO_NUM])
+	if (*full == table->philo_num)
 	{
-		data[STOP] = 1;
+		pthread_mutex_lock(table->stop_lock);
+		table->stop = 1;
+		pthread_mutex_unlock(table->stop_lock);
 		return (1);
 	}
 	return (0);

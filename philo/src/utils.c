@@ -49,7 +49,7 @@ int	ft_atoi(char *num)
 
 //usleep take microsec as arg (10^-6)
 //start and now is milli sec
-int	ft_usleep(unsigned int millisec, int *data)
+int	ft_usleep(unsigned int millisec, t_table *table)
 {
 	long			start;
 	long			now;
@@ -58,8 +58,13 @@ int	ft_usleep(unsigned int millisec, int *data)
 	start = ft_set_time();
 	while (millisec > now + 1000)
 	{
-		if (data[STOP])
+		pthread_mutex_lock(table->stop_lock);
+		if (table->stop == 1)
+		{
+			pthread_mutex_unlock(table->stop_lock);
 			return (0);
+		}
+		pthread_mutex_unlock(table->stop_lock);
 		if (usleep(1000000))
 		{
 			write(2, "usleep fails\n", 13);

@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	{
 		return (0);
 	}
-	ft_loop(table, table->philo, table->data);
+	ft_loop(table, table->philo);
 	ft_thread_join(table, table->philo);
 	ft_destroy_mutex(table);
 	ft_free(&table);

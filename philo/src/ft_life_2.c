@@ -12,106 +12,124 @@
 
 #include "philo.h"
 
-int	ft_think(int num, long start_time, t_mutex *lock[], int *data)
+/*
+	all the function here return 1 when stop = 1 or the loop should end
+*/
+
+int	ft_think(t_philo *philo, t_table *table)
 {
 	long	time;
 
-	time = ft_get_time(start_time);
-	pthread_mutex_lock(lock[PRINT]);
-	if (data[STOP])
+	pthread_mutex_lock(philo->print_lock);
+	pthread_mutex_lock(philo->stop_lock);
+	if (table->stop == 1)
 	{
-		pthread_mutex_unlock(lock[PRINT]);
+		pthread_mutex_unlock(philo->stop_lock);
+		pthread_mutex_unlock(philo->print_lock);
 		return (1);
 	}
-	printf("%lu %u ", time, num);
+	time = ft_get_time(table->start_time);
+	printf("%lu %u ", time, philo->num);
 	printf("is thinking\n");
-	pthread_mutex_unlock(lock[PRINT]);
+	pthread_mutex_unlock(philo->stop_lock);
+	pthread_mutex_unlock(philo->print_lock);
 	return (0);
 }
 
-int	ft_eat(t_philo *philo, long start_time, t_mutex *lock[], int *data)
+int	ft_eat(t_philo *philo, t_table *table)
 {
-	int		num;
 	long	time;
 
-	num = philo->num;
-	pthread_mutex_lock(lock[PRINT]);
-	if (data[STOP])
+	pthread_mutex_lock(philo->print_lock);
+	pthread_mutex_lock(philo->stop_lock);
+	if (table->stop == 1)
 	{
-		pthread_mutex_unlock(lock[FORK_L]);
-		pthread_mutex_unlock(lock[FORK_R]);
+		pthread_mutex_lock(philo->print_lock);
+		pthread_mutex_lock(philo->stop_lock);
+		pthread_mutex_unlock(philo->fork1);
+		pthread_mutex_unlock(philo->fork2);
 		return (1);
 	}
-	time = ft_get_time(start_time);
-	printf("%lu %u ", time, num);
+	time = ft_get_time(table->start_time);
+	printf("%lu %u ", time, philo->num);
 	printf("is eating\n");
-	pthread_mutex_unlock(lock[PRINT]);
+	pthread_mutex_lock(philo->print_lock);
+	pthread_mutex_lock(philo->stop_lock);
 	philo->meal_eaten++;
 	philo->last_meal_time = time;
-	ft_usleep(data[TIME_TO_EAT], data);
-	pthread_mutex_unlock(lock[FORK_L]);
-	pthread_mutex_unlock(lock[FORK_R]);
+	ft_usleep(table->time_to_eat, table);
+	pthread_mutex_unlock(philo->fork1);
+	pthread_mutex_unlock(philo->fork2);
 	return (0);
 }
 
-int	ft_get_fork_1(int num, long start_time, t_mutex *lock[], int *data)
+int	ft_get_fork1(t_philo *philo, t_table *table)
 {
 	long	time;
 
-	pthread_mutex_lock(lock[FORK_L]);
-	time = ft_get_time(start_time);
-	pthread_mutex_lock(lock[PRINT]);
-	if (data[STOP])
+	pthread_mutex_lock(philo->fork1);
+	time = ft_get_time(table->start_time);
+	pthread_mutex_lock(philo->print_lock);
+	pthread_mutex_lock(philo->stop_lock);
+	if (table->stop == 1)
 	{
-		pthread_mutex_unlock(lock[FORK_L]);
-		pthread_mutex_unlock(lock[PRINT]);
+		pthread_mutex_lock(philo->fork1);
+		pthread_mutex_lock(philo->print_lock);
+		pthread_mutex_lock(philo->stop_lock);
 		return (1);
 	}
-	printf("%lu %u ", time, num);
+	printf("%lu %u ", time, philo->num);
 	printf("has taken a fork\n");
-	pthread_mutex_unlock(lock[PRINT]);
+	pthread_mutex_unlock(philo->stop_lock);
+	pthread_mutex_unlock(philo->print_lock);
 	return (0);
 }
 
-int	ft_get_fork_2(int num, long start_time, t_mutex *lock[], int *data)
+int	ft_get_fork2(t_philo *philo, t_table *table)
 {
 	long	time;
 
-	if (lock[FORK_L] == lock[FORK_R])
+	if (philo->fork1 == philo->fork2)
 	{
-		pthread_mutex_unlock(lock[FORK_L]);
+		pthread_mutex_unlock(philo->fork1);
 		return (1);
 	}
-	pthread_mutex_lock(lock[FORK_R]);
-	pthread_mutex_lock(lock[PRINT]);
-	time = ft_get_time(start_time);
-	if (data[STOP])
+	pthread_mutex_lock(philo->fork2);
+	time = ft_get_time(table->start_time);
+	pthread_mutex_lock(philo->print_lock);
+	pthread_mutex_lock(philo->stop_lock);
+	if (table->stop == 1)
 	{
-		pthread_mutex_unlock(lock[FORK_L]);
-		pthread_mutex_unlock(lock[FORK_R]);
-		pthread_mutex_unlock(lock[PRINT]);
+		pthread_mutex_lock(philo->fork1);
+		pthread_mutex_lock(philo->fork2);
+		pthread_mutex_lock(philo->print_lock);
+		pthread_mutex_lock(philo->stop_lock);
 		return (1);
 	}
-	printf("%lu %u ", time, num);
+	printf("%lu %u ", time, philo->num);
 	printf("has taken a fork\n");
-	pthread_mutex_unlock(lock[PRINT]);
+	pthread_mutex_unlock(philo->print_lock);
+	pthread_mutex_unlock(philo->stop_lock);
 	return (0);
 }
 
-int	ft_sleep(int num, long start_time, t_mutex *lock[], int *data)
+int	ft_sleep(t_philo *philo, t_table *table)
 {
 	long	time;
 
-	pthread_mutex_lock(lock[PRINT]);
-	time = ft_get_time(start_time);
-	if (data[STOP])
+	pthread_mutex_lock(philo->print_lock);
+	pthread_mutex_lock(philo->stop_lock);
+	if (table->stop == 1)
 	{
-		pthread_mutex_unlock(lock[PRINT]);
+		pthread_mutex_unlock(philo->print_lock);
+		pthread_mutex_unlock(philo->stop_lock);
 		return (1);
 	}
-	printf("%lu %u ", time, num);
+	time = ft_get_time(table->start_time);
+	printf("%lu %u ", time, philo->num);
 	printf("is sleeping\n");
-	pthread_mutex_unlock(lock[PRINT]);
-	ft_usleep(data[TIME_TO_SLEEP], data);
+	pthread_mutex_unlock(philo->print_lock);
+	pthread_mutex_unlock(philo->stop_lock);
+	ft_usleep(table->time_to_sleep, table);
 	return (0);
 }

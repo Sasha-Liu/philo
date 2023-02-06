@@ -32,7 +32,9 @@ typedef struct s_table{
 	int				meal_num;
 	int				stop;
 	long			start_time;
-	pthread_mutex_t	*lock
+	pthread_mutex_t	*lock;
+	pthread_mutex_t	*print_lock;
+	pthread_mutex_t	*stop_lock;
 	t_philo			*philo;
 }	t_table;
 
@@ -44,8 +46,8 @@ typedef struct s_philo{
 	long			last_meal_time;
 	pthread_mutex_t	*fork1;	
 	pthread_mutex_t	*fork2;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	*stop;
+	pthread_mutex_t	*print_lock;
+	pthread_mutex_t	*stop_lock;
 	t_table			*table;
 }	t_philo;
 
@@ -54,7 +56,7 @@ int		ft_check_input(int argc, char **argv);
 int		ft_is_num(char *num);
 
 /**********  ft_malloc.c  **********/
-t_table	*ft_malloc(unsigned int philo_num);
+t_table	*ft_malloc(int philo_num);
 void	ft_free(t_table **table);
 
 /**********  ft_init.c  **********/
@@ -72,24 +74,23 @@ void	ft_thread_join(t_table *table, t_philo *philo);
 
 /**********  ft_life.c  **********/
 void	*ft_life(void *arg);
-int		ft_init_life(t_philo *philo, int **data, long **start, t_mutex *lock[]);
 
 /**********  ft_life_2.c  **********/
-int		ft_think(int num, long start_time, t_mutex *lock[], int *data);
-int		ft_eat(t_philo *philo, long start_time, t_mutex *lock[], int *data);
-int		ft_get_fork_1(int num, long start_time, t_mutex *lock[], int *data);
-int		ft_get_fork_2(int num, long start_time, t_mutex *lock[], int *data);
-int		ft_sleep(int num, long start_time, t_mutex *lock[], int *data);
+int	ft_think(t_philo *philo, t_table *table);
+int	ft_eat(t_philo *philo, t_table *table);
+int	ft_get_fork1(t_philo *philo, t_table *table);
+int	ft_get_fork2(t_philo *philo, t_table *table);
+int	ft_sleep(t_philo *philo, t_table *table);
 
 /**********  ft_loop.c  **********/
-void	ft_loop(t_table *table, t_philo *philo, int *data);
-int		ft_is_dead(t_philo *philo, long start_time, int *data, t_mutex *print);
-int		ft_all_is_full(t_philo *philo, int *full, int *data);
+void	ft_loop(t_table *table, t_philo *philo);
+int		ft_is_dead(t_philo *philo, t_table *table);
+int		ft_all_is_full(t_philo *philo, int *full, t_table *table);
 
 /**********  utils.c  **********/
 int		ft_atoi(char *num);
 long	ft_set_time(void);
 long	ft_get_time(long start_time);
-int		ft_usleep(unsigned int sec, int *data);
+int		ft_usleep(unsigned int sec, t_table *table);
 
 #endif
