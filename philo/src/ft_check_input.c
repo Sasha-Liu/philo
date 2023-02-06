@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-
-//if error return 1
-//else return 0
+/*
+	if error return 1
+	else return 0
+*/
 int	ft_check_input(int argc, char **argv)
 {
 	int	i;
@@ -33,9 +34,11 @@ int	ft_check_input(int argc, char **argv)
 	return (0);
 }
 
-//if it's a non negative number, return 1
-//else return 0
-//doesn't check overflow / underflow
+/*
+	if it's a non negative number, return 1
+	else return 0
+	doesn't check overflow / underflow
+*/
 int	ft_is_num(char *num)
 {
 	while (*num == ' ')

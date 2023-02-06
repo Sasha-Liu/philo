@@ -31,7 +31,7 @@ int	ft_init(t_table *table, int argc, char **argv)
 void	ft_init_table(t_table *table, int argc, char **argv)
 {
 	int	n;
-	
+
 	table->philo_num = ft_atoi(argv[1]);
 	table->time_to_die = ft_atoi(argv[2]);
 	table->time_to_eat = ft_atoi(argv[3]);
@@ -60,7 +60,7 @@ void	ft_init_philo(t_table *table)
 		philo[i].meal_eaten = 0;
 		philo[i].stop = (&(table->stop));
 		philo[i].last_meal_time = 0;
-		philo[i].fork1 = &(table->lock[i]); 
+		philo[i].fork1 = &(table->lock[i]);
 		philo[i].fork2 = &(table->lock[(i + 1) % n]);
 		philo[i].print_lock = &(table->lock[n]);
 		philo[i].stop_lock = &(table->lock[n + 1]);

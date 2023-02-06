@@ -34,7 +34,9 @@ t_table	*ft_malloc(int philo_num)
 	return (table);
 }
 
-//free resources
+/*
+	free resources
+*/
 void	ft_free(t_table **table)
 {
 	free((*table)->philo);

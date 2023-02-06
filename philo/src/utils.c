@@ -12,8 +12,10 @@
 
 #include "philo.h"
 
-//return time in millisecond
-//use to set the starting time 
+/*
+	return time in millisecond
+	use to set the starting time 
+*/
 long	ft_set_time(void)
 {
 	struct timeval	tv;
@@ -47,8 +49,10 @@ int	ft_atoi(char *num)
 	return (sum);
 }
 
-//usleep take microsec as arg (10^-6)
-//start and now is milli sec
+/*
+	usleep take microsec as arg (10^-6)
+	start and now is milli sec
+*/
 int	ft_usleep(unsigned int millisec, t_table *table)
 {
 	long			start;

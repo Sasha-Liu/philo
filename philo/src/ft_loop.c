@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-
-//set start time
-//set stop = 0
-//count meals eaten
-//check if someone's dead
-//if stop=TRUE, then lock print
+/*
+	set start time
+	set stop = 0
+	count meals eaten
+	check if someone's dead
+	if stop=TRUE, then lock print
+*/
 void	ft_loop(t_table *table, t_philo *philo)
 {
 	int		i;

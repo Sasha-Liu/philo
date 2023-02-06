@@ -44,8 +44,8 @@ int	ft_eat(t_philo *philo, t_table *table)
 	pthread_mutex_lock(philo->stop_lock);
 	if (table->stop == 1)
 	{
-		pthread_mutex_lock(philo->print_lock);
-		pthread_mutex_lock(philo->stop_lock);
+		pthread_mutex_unlock(philo->print_lock);
+		pthread_mutex_unlock(philo->stop_lock);
 		pthread_mutex_unlock(philo->fork1);
 		pthread_mutex_unlock(philo->fork2);
 		return (1);
@@ -53,8 +53,8 @@ int	ft_eat(t_philo *philo, t_table *table)
 	time = ft_get_time(table->start_time);
 	printf("%lu %u ", time, philo->num);
 	printf("is eating\n");
-	pthread_mutex_lock(philo->print_lock);
-	pthread_mutex_lock(philo->stop_lock);
+	pthread_mutex_unlock(philo->print_lock);
+	pthread_mutex_unlock(philo->stop_lock);
 	philo->meal_eaten++;
 	philo->last_meal_time = time;
 	ft_usleep(table->time_to_eat, table);
@@ -73,9 +73,9 @@ int	ft_get_fork1(t_philo *philo, t_table *table)
 	pthread_mutex_lock(philo->stop_lock);
 	if (table->stop == 1)
 	{
-		pthread_mutex_lock(philo->fork1);
-		pthread_mutex_lock(philo->print_lock);
-		pthread_mutex_lock(philo->stop_lock);
+		pthread_mutex_unlock(philo->fork1);
+		pthread_mutex_unlock(philo->print_lock);
+		pthread_mutex_unlock(philo->stop_lock);
 		return (1);
 	}
 	printf("%lu %u ", time, philo->num);
@@ -100,10 +100,10 @@ int	ft_get_fork2(t_philo *philo, t_table *table)
 	pthread_mutex_lock(philo->stop_lock);
 	if (table->stop == 1)
 	{
-		pthread_mutex_lock(philo->fork1);
-		pthread_mutex_lock(philo->fork2);
-		pthread_mutex_lock(philo->print_lock);
-		pthread_mutex_lock(philo->stop_lock);
+		pthread_mutex_unlock(philo->fork1);
+		pthread_mutex_unlock(philo->fork2);
+		pthread_mutex_unlock(philo->print_lock);
+		pthread_mutex_unlock(philo->stop_lock);
 		return (1);
 	}
 	printf("%lu %u ", time, philo->num);

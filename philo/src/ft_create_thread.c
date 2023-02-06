@@ -12,10 +12,12 @@
 
 #include "philo.h"
 
-//if all goes well return 0
-//else (thread creation fails) return 1
-//pthread_detach error is not protected 
-//(since all resoucre return to systen after main exit) 
+/*
+	if all goes well return 0
+	else (thread creation fails) return 1
+	pthread_detach error is not protected 
+	(since all resoucre return to systen after main exit) 
+*/
 int	ft_create_thread(t_table *table, t_philo *philo)
 {
 	int	i;

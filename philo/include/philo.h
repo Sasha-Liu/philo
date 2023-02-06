@@ -76,11 +76,11 @@ void	ft_thread_join(t_table *table, t_philo *philo);
 void	*ft_life(void *arg);
 
 /**********  ft_life_2.c  **********/
-int	ft_think(t_philo *philo, t_table *table);
-int	ft_eat(t_philo *philo, t_table *table);
-int	ft_get_fork1(t_philo *philo, t_table *table);
-int	ft_get_fork2(t_philo *philo, t_table *table);
-int	ft_sleep(t_philo *philo, t_table *table);
+int		ft_think(t_philo *philo, t_table *table);
+int		ft_eat(t_philo *philo, t_table *table);
+int		ft_get_fork1(t_philo *philo, t_table *table);
+int		ft_get_fork2(t_philo *philo, t_table *table);
+int		ft_sleep(t_philo *philo, t_table *table);
 
 /**********  ft_loop.c  **********/
 void	ft_loop(t_table *table, t_philo *philo);
