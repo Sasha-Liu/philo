@@ -41,15 +41,14 @@ void	ft_init_table(t_table *table, int argc, char **argv)
 	if (argc == 6)
 		table->meal_num = ft_atoi(argv[5]);
 	n = table->philo_num;
-	table->print_lock = &(table->lock[n]);
-	table->stop_lock = &(table->lock[n + 1]);
+	table->stop_lock = &(table->lock[n]);
 }
 
 void	ft_init_philo(t_table *table)
 {
-	int		i;
-	int		n;
-	t_philo	*philo;
+	int				i;
+	int				n;
+	t_philo			*philo;
 
 	i = 0;
 	n = table->philo_num;
@@ -62,8 +61,8 @@ void	ft_init_philo(t_table *table)
 		philo[i].last_meal_time = 0;
 		philo[i].fork1 = &(table->lock[i]);
 		philo[i].fork2 = &(table->lock[(i + 1) % n]);
-		philo[i].print_lock = &(table->lock[n]);
-		philo[i].stop_lock = &(table->lock[n + 1]);
+		philo[i].meal_lock = &(table->lock[n + 1 + i]);
+		philo[i].stop_lock = &(table->lock[n]);
 		philo[i].table = table;
 		i++;
 	}

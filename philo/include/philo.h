@@ -33,7 +33,6 @@ typedef struct s_table{
 	int				stop;
 	long			start_time;
 	pthread_mutex_t	*lock;
-	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	*stop_lock;
 	t_philo			*philo;
 }	t_table;
@@ -46,7 +45,7 @@ typedef struct s_philo{
 	long			last_meal_time;
 	pthread_mutex_t	*fork1;	
 	pthread_mutex_t	*fork2;
-	pthread_mutex_t	*print_lock;
+	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*stop_lock;
 	t_table			*table;
 }	t_philo;

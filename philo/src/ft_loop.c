@@ -46,27 +46,33 @@ int	ft_is_dead(t_philo *philo, t_table *table)
 	long	time;
 
 	time = ft_get_time(table->start_time);
+	pthread_mutex_lock(philo->meal_lock);
 	if (philo->last_meal_time + table->time_to_die < time)
 	{
+		pthread_mutex_unlock(philo->meal_lock);
 		pthread_mutex_lock(table->stop_lock);
 		table->stop = 1;
 		pthread_mutex_unlock(table->stop_lock);
-		pthread_mutex_lock(table->print_lock);
 		printf("%lu %d died\n", time, philo->num);
-		pthread_mutex_unlock(table->print_lock);
 		return (1);
 	}
+	pthread_mutex_unlock(philo->meal_lock);
 	return (0);
 }
 
 int	ft_all_is_full(t_philo *philo, int *full, t_table *table)
 {
+	pthread_mutex_lock(philo->meal_lock);
 	if (table->meal_num == -1)
+	{
+		pthread_mutex_unlock(philo->meal_lock);
 		return (0);
+	}
 	if (philo->meal_eaten >= table->meal_num)
 	{
 		(*full)++;
 	}
+	pthread_mutex_unlock(philo->meal_lock);
 	if (*full == table->philo_num)
 	{
 		pthread_mutex_lock(table->stop_lock);
