@@ -62,7 +62,9 @@ void	ft_init_philo(t_table *table)
 		philo[i].fork1 = &(table->lock[i]);
 		philo[i].fork2 = &(table->lock[(i + 1) % n]);
 		philo[i].meal_lock = &(table->lock[n + 1 + i]);
+		philo[i].eat_lock = &(table->lock[n + n + 1 + i]);
 		philo[i].stop_lock = &(table->lock[n]);
+		philo[i].eat = 0;
 		philo[i].table = table;
 		i++;
 	}

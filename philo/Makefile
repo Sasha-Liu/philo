@@ -24,7 +24,7 @@ MAKEFILE	=	Makefile
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=thread
+CFLAGS	=	-Wall -Wextra -Werror 
 
 all: $(NAME)
 
@@ -45,4 +45,4 @@ fclean: clean
 
 re:	fclean $(NAME)
 
-.PHONY: clean fclearn re all bonus
+.PHONY: clean fclean re all bonus

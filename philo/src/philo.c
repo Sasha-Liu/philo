@@ -17,9 +17,9 @@ int	main(int argc, char **argv)
 	t_table	*table;
 
 	if (ft_check_input(argc, argv))
-	{
 		return (0);
-	}
+	if (ft_atoi(argv[1]) == 0)
+		return (0);
 	table = ft_malloc(ft_atoi(argv[1]));
 	if (table == NULL)
 	{

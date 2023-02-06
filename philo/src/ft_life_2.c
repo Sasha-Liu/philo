@@ -47,13 +47,22 @@ int	ft_eat(t_philo *philo, t_table *table)
 	time = ft_get_time(table->start_time);
 	printf("%lu %u is eating\n", time, philo->num);
 	pthread_mutex_unlock(philo->stop_lock);
+	
 	pthread_mutex_lock(philo->meal_lock);
 	philo->meal_eaten++;
 	philo->last_meal_time = time;
 	pthread_mutex_unlock(philo->meal_lock);
+	
+	pthread_mutex_lock(philo->eat_lock);
+	philo->eat = 1;
+	pthread_mutex_unlock(philo->eat_lock);
+
 	ft_usleep(table->time_to_eat, table);
 	pthread_mutex_unlock(philo->fork1);
 	pthread_mutex_unlock(philo->fork2);
+	pthread_mutex_lock(philo->eat_lock);
+	philo->eat = 0;
+	pthread_mutex_unlock(philo->eat_lock);
 	return (0);
 }
 

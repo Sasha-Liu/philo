@@ -20,7 +20,7 @@ t_table	*ft_malloc(int philo_num)
 
 	table = malloc(sizeof(t_table));
 	philo = malloc(sizeof(t_philo) * philo_num);
-	lock = malloc(sizeof(pthread_mutex_t) * (philo_num * 2 + 1));
+	lock = malloc(sizeof(pthread_mutex_t) * (philo_num * 3 + 1));
 	if (table == NULL || philo == NULL || lock == NULL)
 	{
 		free(table);

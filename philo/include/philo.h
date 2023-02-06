@@ -45,6 +45,8 @@ typedef struct s_philo{
 	long			last_meal_time;
 	pthread_mutex_t	*fork1;	
 	pthread_mutex_t	*fork2;
+	pthread_mutex_t	*eat_lock;
+	int				eat;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*stop_lock;
 	t_table			*table;
@@ -73,6 +75,7 @@ void	ft_thread_join(t_table *table, t_philo *philo);
 
 /**********  ft_life.c  **********/
 void	*ft_life(void *arg);
+int		ft_neighbor_are_both_eating(t_philo *philo_l, t_philo *philo_r);
 
 /**********  ft_life_2.c  **********/
 int		ft_think(t_philo *philo, t_table *table);

@@ -18,7 +18,7 @@ int	ft_init_mutex(t_table *table)
 	int	n;
 
 	i = 0;
-	n = table->philo_num * 2 + 1;
+	n = table->philo_num * 3 + 1;
 	while (i < n)
 	{
 		if (pthread_mutex_init(&(table->lock[i]), NULL))
@@ -41,7 +41,7 @@ int	ft_destroy_mutex(t_table *table)
 	int	n;
 
 	i = 0;
-	n = table->philo_num * 2 + 1;
+	n = table->philo_num * 3 + 1;
 	while (i < n)
 	{
 		if (pthread_mutex_destroy(&(table->lock[i])))
