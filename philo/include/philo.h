@@ -24,20 +24,15 @@ typedef struct s_philo	t_philo;
 typedef struct s_table	t_table;
 typedef pthread_mutex_t	t_mutex;
 
-# define PHILO_NUM 0
-# define TIME_TO_DIE 1
-# define TIME_TO_EAT 2
-# define TIME_TO_SLEEP 3
-# define MEAL_NUM 4
-# define STOP 5
-# define PRINT 0
-# define FORK_L 1
-# define FORK_R 2
-
 typedef struct s_table{
-	int				data[6];
+	int				philo_num;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				meal_num;
+	int				stop;
 	long			start_time;
-	pthread_mutex_t	*lock;
+	pthread_mutex_t	*lock
 	t_philo			*philo;
 }	t_table;
 
@@ -45,7 +40,12 @@ typedef struct s_philo{
 	pthread_t		tid;
 	int				num;
 	int				meal_eaten;
+	int				*stop;
 	long			last_meal_time;
+	pthread_mutex_t	*fork1;	
+	pthread_mutex_t	*fork2;
+	pthread_mutex_t	*print;
+	pthread_mutex_t	*stop;
 	t_table			*table;
 }	t_philo;
 

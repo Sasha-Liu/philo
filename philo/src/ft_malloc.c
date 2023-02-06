@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-t_table	*ft_malloc(unsigned int philo_num)
+t_table	*ft_malloc(int philo_num)
 {
 	t_table			*table;
 	t_philo			*philo;
@@ -20,7 +20,7 @@ t_table	*ft_malloc(unsigned int philo_num)
 
 	table = malloc(sizeof(t_table));
 	philo = malloc(sizeof(t_philo) * philo_num);
-	lock = malloc(sizeof(pthread_mutex_t) * (philo_num + 1));
+	lock = malloc(sizeof(pthread_mutex_t) * (philo_num + 2));
 	if (table == NULL || philo == NULL || lock == NULL)
 	{
 		free(table);
@@ -29,8 +29,8 @@ t_table	*ft_malloc(unsigned int philo_num)
 		write(2, "malloc fails\n", 13);
 		return (NULL);
 	}
-	table->lock = lock;
 	table->philo = philo;
+	table->lock = lock;
 	return (table);
 }
 
@@ -38,8 +38,8 @@ t_table	*ft_malloc(unsigned int philo_num)
 void	ft_free(t_table **table)
 {
 	free((*table)->philo);
-	free((*table)->lock);
 	(*table)->philo = NULL;
+	free((*table)->lock);
 	(*table)->lock = NULL;
 	free(*table);
 	*table = NULL;

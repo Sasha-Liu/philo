@@ -15,25 +15,25 @@
 int	ft_init(t_table *table, int argc, char **argv)
 {
 	ft_init_table(table, argc, argv);
-	ft_init_philo(table);
 	if (ft_init_mutex(table))
 	{
 		write(2, "pthread_mutex_init fails\n", 25);
 		return (1);
 	}
+	ft_init_philo(table);
 	return (0);
 }
 
 void	ft_init_table(t_table *table, int argc, char **argv)
 {
-	table->data[PHILO_NUM] = ft_atoi(argv[1]);
-	table->data[TIME_TO_DIE] = ft_atoi(argv[2]);
-	table->data[TIME_TO_EAT] = ft_atoi(argv[3]);
-	table->data[TIME_TO_SLEEP] = ft_atoi(argv[4]);
-	table->data[MEAL_NUM] = -1;
+	table->philo_num = ft_atoi(argv[1]);
+	table->time_to_die = ft_atoi(argv[2]);
+	table->time_to_eat = ft_atoi(argv[3]);
+	table->time_to_sleep = ft_atoi(argv[4]);
+	table->meal_num = -1;
+	table->stop = 1;
 	if (argc == 6)
 		table->data[MEAL_NUM] = ft_atoi(argv[5]);
-	table->data[STOP] = 1;
 }
 
 void	ft_init_philo(t_table *table)
@@ -43,13 +43,18 @@ void	ft_init_philo(t_table *table)
 	t_philo	*philo;
 
 	i = 0;
-	n = table->data[PHILO_NUM];
+	n = table->philo_num;
 	philo = table->philo;
 	while (i < n)
 	{
 		philo[i].num = i;
 		philo[i].meal_eaten = 0;
+		philo[i].stop = (&(table->stop));
 		philo[i].last_meal_time = 0;
+		philo[i].fork1 = &(table->lock[i]); 
+		philo[i].fork2 = &(table->lock[(i + 1) % n]);
+		philo[i].print = &(table->lock[n]);
+		philo[i].stop = &(table->lock[n + 1]);
 		philo[i].table = table;
 		i++;
 	}

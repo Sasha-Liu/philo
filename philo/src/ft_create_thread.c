@@ -22,7 +22,7 @@ int	ft_create_thread(t_table *table, t_philo *philo)
 	int	n;
 
 	i = 0;
-	n = table->data[PHILO_NUM];
+	n = table->philo_num;
 	while (i < n)
 	{
 		if (pthread_create(&(philo[i].tid), NULL, ft_life, &(philo[i])))
@@ -41,7 +41,7 @@ void	ft_thread_join(t_table *table, t_philo *philo)
 	void	*ret;
 
 	i = 0;
-	while (i < table->data[PHILO_NUM])
+	while (i < table->philo_num)
 	{
 		pthread_join(philo[i].tid, &ret);
 		i++;
