@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:50:37 by sasha             #+#    #+#             */
-/*   Updated: 2023/02/07 10:00:30 by sasha            ###   ########.fr       */
+/*   Updated: 2023/02/07 11:11:37 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_init_philo(t_table *table)
 	int				i;
 	int				n;
 	t_philo			*philo;
+	pthread_mutex_t	*temp;
 
 	i = 0;
 	n = table->philo_num;
@@ -66,8 +67,6 @@ void	ft_init_philo(t_table *table)
 		philo[i].table = table;
 		i++;
 	}
-	pthread_mutex_t	*temp;
-
 	temp = philo[0].fork1;
 	philo[0].fork1 = philo[0].fork2;
 	philo[0].fork2 = temp;
