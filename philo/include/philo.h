@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:33:30 by sasha             #+#    #+#             */
-/*   Updated: 2023/02/07 10:07:28 by sasha            ###   ########.fr       */
+/*   Updated: 2023/02/07 11:09:01 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef struct s_philo{
 	long			last_meal_time;
 	pthread_mutex_t	*fork1;	
 	pthread_mutex_t	*fork2;
-	pthread_mutex_t	*state_lock;
-	int				state;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*stop_lock;
 	t_table			*table;
@@ -75,7 +73,6 @@ void	ft_thread_join(t_table *table, t_philo *philo);
 
 /**********  ft_life.c  **********/
 void	*ft_life(void *arg);
-/*int		ft_neighbor_are_both_eating(t_philo *philo_l, t_philo *philo_r);*/
 
 /**********  ft_life_2.c  **********/
 int		ft_think(t_philo *philo, t_table *table);

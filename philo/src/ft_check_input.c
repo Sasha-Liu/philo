@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:03:28 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 14:57:18 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/02/07 11:08:03 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
 /*
 	if error return 1
 	else return 0

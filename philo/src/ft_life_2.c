@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:28:01 by sasha             #+#    #+#             */
-/*   Updated: 2023/02/07 10:44:34 by sasha            ###   ########.fr       */
+/*   Updated: 2023/02/07 11:08:27 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 	all the function here return 1 when stop = 1 or the loop should end
 */
-
 int	ft_think(t_philo *philo, t_table *table)
 {
 	long			time;
