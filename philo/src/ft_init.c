@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:50:37 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/21 12:30:57 by sasha            ###   ########.fr       */
+/*   Updated: 2023/02/07 10:00:30 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,13 @@ void	ft_init_philo(t_table *table)
 		philo[i].fork1 = &(table->lock[i]);
 		philo[i].fork2 = &(table->lock[(i + 1) % n]);
 		philo[i].meal_lock = &(table->lock[n + 1 + i]);
-		philo[i].eat_lock = &(table->lock[n + n + 1 + i]);
 		philo[i].stop_lock = &(table->lock[n]);
-		philo[i].eat = 0;
 		philo[i].table = table;
 		i++;
 	}
+	pthread_mutex_t	*temp;
+
+	temp = philo[0].fork1;
+	philo[0].fork1 = philo[0].fork2;
+	philo[0].fork2 = temp;
 }

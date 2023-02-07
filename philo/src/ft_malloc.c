@@ -6,7 +6,7 @@
 /*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:23:08 by hsliu             #+#    #+#             */
-/*   Updated: 2023/01/21 12:21:33 by sasha            ###   ########.fr       */
+/*   Updated: 2023/02/06 22:18:48 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_table	*ft_malloc(int philo_num)
 
 	table = malloc(sizeof(t_table));
 	philo = malloc(sizeof(t_philo) * philo_num);
-	lock = malloc(sizeof(pthread_mutex_t) * (philo_num * 3 + 1));
+	lock = malloc(sizeof(pthread_mutex_t) * (philo_num * 2 + 1));
 	if (table == NULL || philo == NULL || lock == NULL)
 	{
 		free(table);

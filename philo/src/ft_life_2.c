@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_life_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsliu <hsliu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sasha <sasha@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:28:01 by sasha             #+#    #+#             */
-/*   Updated: 2023/01/25 16:36:52 by hsliu            ###   ########.fr       */
+/*   Updated: 2023/02/07 10:44:34 by sasha            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	ft_think(t_philo *philo, t_table *table)
 {
-	long	time;
+	long			time;
 
 	pthread_mutex_lock(philo->stop_lock);
 	if (table->stop == 1)
@@ -29,6 +29,8 @@ int	ft_think(t_philo *philo, t_table *table)
 	time = ft_get_time(table->start_time);
 	printf("%lu %u is thinking\n", time, philo->num);
 	pthread_mutex_unlock(philo->stop_lock);
+	if (table->time_to_eat >= table->time_to_sleep && table->philo_num % 2)
+		ft_usleep(table->time_to_eat - table->time_to_sleep + 1, table);
 	return (0);
 }
 
@@ -47,22 +49,13 @@ int	ft_eat(t_philo *philo, t_table *table)
 	time = ft_get_time(table->start_time);
 	printf("%lu %u is eating\n", time, philo->num);
 	pthread_mutex_unlock(philo->stop_lock);
-	
 	pthread_mutex_lock(philo->meal_lock);
 	philo->meal_eaten++;
 	philo->last_meal_time = time;
 	pthread_mutex_unlock(philo->meal_lock);
-	
-	pthread_mutex_lock(philo->eat_lock);
-	philo->eat = 1;
-	pthread_mutex_unlock(philo->eat_lock);
-
 	ft_usleep(table->time_to_eat, table);
 	pthread_mutex_unlock(philo->fork1);
 	pthread_mutex_unlock(philo->fork2);
-	pthread_mutex_lock(philo->eat_lock);
-	philo->eat = 0;
-	pthread_mutex_unlock(philo->eat_lock);
 	return (0);
 }
 
